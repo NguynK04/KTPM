@@ -1,22 +1,15 @@
 pipeline {
     agent any
-    
     stages {
         stage('Build & Test') {
             steps {
-                echo '>>> Dang cai dat thu vien va chay Test...'
-                // Chạy lệnh Maven trên Windows
-                bat 'mvn clean test'
+                // Lệnh này bảo Jenkins: "Hãy chui vào thư mục này trước khi làm việc"
+                dir('Jenkins_Demo_Project') {
+                    echo '>>> Dang chui vao thu muc code...'
+                    // Windows dùng bat, Mac/Linux dùng sh
+                    bat 'mvn clean test'
+                }
             }
-        }
-    }
-    
-    post {
-        success {
-            echo '>>> SUCCESS: Chuc mung! Code chay ngon.'
-        }
-        failure {
-            echo '>>> FAILURE: Toang roi! Code co loi.'
         }
     }
 }
