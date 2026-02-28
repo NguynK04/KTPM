@@ -34,7 +34,7 @@ public class GoogleSearchTest {
         driver.get("https://www.google.com");
         
         // Ngủ 2 giây để ông kịp nhìn thấy trình duyệt nó hiện lên
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         String title = driver.getTitle();
         System.out.println(">>> [INFO] Tieu de trang web la: " + title);
@@ -43,7 +43,7 @@ public class GoogleSearchTest {
         assertTrue(title.contains("Google"));
         
         System.out.println(">>> [PASS] Test thanh cong! Web da san sang.");
-        System.out.println("Demo Success!");
+        
     }
 
     @AfterEach
