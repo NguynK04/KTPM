@@ -1,13 +1,11 @@
 pipeline {
-    agent any
-    stages {
-        stage('Test') {
-            steps {
-                // Lệnh dir để in ra danh sách file cho dễ bắt bệnh
-                bat 'dir' 
-                // Ép nó chui vào thư mục rồi mới chạy mvn
-                bat 'cd Jenkins_Demo_Project && mvn clean test'
-            }
-        }
+  agent any
+  stages {
+    stage('Test Google') {
+      steps {
+        bat 'mvn clean test'
+      }
     }
+
+  }
 }
