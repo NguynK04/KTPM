@@ -1,13 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Test Google') {
+        stage('Test') {
             steps {
-                // Đây là "chìa khóa": Dẫn Jenkins vào thư mục chứa pom.xml
-                dir('Jenkins_Demo_Project') {
-                    echo '>>> Dang chui vao thu muc code de tim pom.xml...'
-                    bat 'mvn clean test'
-                }
+                // Lệnh dir để in ra danh sách file cho dễ bắt bệnh
+                bat 'dir' 
+                // Ép nó chui vào thư mục rồi mới chạy mvn
+                bat 'cd Jenkins_Demo_Project && mvn clean test'
             }
         }
     }
