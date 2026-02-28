@@ -22,42 +22,40 @@ public class WikipediaSearchTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
+        
+        // CÚ CHỐT NẰM Ở ĐÂY: Bắt bot phóng to toàn màn hình để web không bị giấu ô tìm kiếm
+        driver.manage().window().maximize();
+        
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Test
     public void testWikiSearch() throws InterruptedException {
         System.out.println(">>> [START] Bat dau mo Wikipedia...");
-        
-        // 1. Vào trang Bách khoa toàn thư Wikipedia
         driver.get("https://vi.wikipedia.org/");
 
-        // 2. Tìm ô tìm kiếm của Wiki (Tên thuộc tính name của nó là 'search')
-        WebElement searchBox = driver.findElement(By.name("search"));
+        // Đổi cách tìm kiếm: Dùng ID (searchInput) sẽ chuẩn xác 100% hơn là dùng name
+        WebElement searchBox = driver.findElement(By.id("searchInput"));
 
-        // 3. Tự động gõ từ khóa "Jenkins"
         String keyword = "Jenkins";
         System.out.println(">>> [INFO] Dang go tu khoa: " + keyword);
         searchBox.sendKeys(keyword);
-
-        // 4. Bấm Enter
         searchBox.sendKeys(Keys.RETURN);
 
-        // Ngủ 4 giây để thầy cô xem kết quả tìm kiếm
-        Thread.sleep(4000);
+        // Đợi hẳn 5 giây cho chắc củ
+        Thread.sleep(5000);
 
-        // 5. Kiểm tra tiêu đề trang kết quả xem có chữ Jenkins không
         String title = driver.getTitle();
         System.out.println(">>> [INFO] Tieu de trang web la: " + title);
         assertTrue(title.contains("Jenkins"));
         
-        System.out.println(">>> [PASS] Test Wiki thanh cong, chuc mung ki chu!");
+        System.out.println(">>> [PASS] Test Wiki thanh cong ruc ro!");
     }
 
     @AfterEach
     public void teardown() {
         if (driver != null) {
-            driver.quit(); // Đóng trình duyệt
+            driver.quit(); 
         }
     }
 }
