@@ -43,6 +43,7 @@ public class GoogleSearchTest {
         assertTrue(title.contains("Google"));
         
         System.out.println(">>> [PASS] Test thanh cong! Web da san sang.");
+        System.out.println("Demo Success!");
     }
 
     @AfterEach
