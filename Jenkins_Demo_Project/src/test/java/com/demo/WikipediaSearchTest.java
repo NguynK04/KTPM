@@ -10,12 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 import java.time.Duration;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class GoogleSearchTest {
+public class WikipediaSearchTest {
     WebDriver driver;
 
     @BeforeEach
@@ -24,43 +22,42 @@ public class GoogleSearchTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
-        
-        // Dặn con Bot: Nếu mạng chậm, hãy kiên nhẫn đợi tối đa 10 giây để web tải xong
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Test
-    public void testGoogleSearch() throws InterruptedException {
-        System.out.println(">>> [START] Bat dau mo Google...");
-        driver.get("https://www.google.com");
+    public void testWikiSearch() throws InterruptedException {
+        System.out.println(">>> [START] Bat dau mo Wikipedia...");
+        
+        // 1. Vào trang Bách khoa toàn thư Wikipedia
+        driver.get("https://vi.wikipedia.org/");
 
-        // 1. Tìm cái ô nhập chữ của Google (Mã nguồn Google đặt tên ô này là 'q')
-        WebElement searchBox = driver.findElement(By.name("q"));
+        // 2. Tìm ô tìm kiếm của Wiki (Tên thuộc tính name của nó là 'search')
+        WebElement searchBox = driver.findElement(By.name("search"));
 
-        // 2. Tự động gõ từ khóa vào ô đó
-        String keyword = "Kiểm thử tự động Jenkins";
+        // 3. Tự động gõ từ khóa "Jenkins"
+        String keyword = "Jenkins";
         System.out.println(">>> [INFO] Dang go tu khoa: " + keyword);
         searchBox.sendKeys(keyword);
 
-        // 3. Tự động bấm phím Enter
+        // 4. Bấm Enter
         searchBox.sendKeys(Keys.RETURN);
 
-        // Giữ lại 3 giây NGỦ Ở CUỐI CÙNG để thầy cô trên lớp kịp nhìn thấy kết quả tìm kiếm
-        // (Không có dòng này nó tắt phụt đi nhanh bằng mili-giây, không ai thấy gì)
-        Thread.sleep(3000);
+        // Ngủ 4 giây để thầy cô xem kết quả tìm kiếm
+        Thread.sleep(4000);
 
-        // 4. Kiểm tra xem tiêu đề trang kết quả có chứa chữ mình tìm không
+        // 5. Kiểm tra tiêu đề trang kết quả xem có chữ Jenkins không
         String title = driver.getTitle();
         System.out.println(">>> [INFO] Tieu de trang web la: " + title);
-        assertTrue(title.contains("Kiểm thử"));
+        assertTrue(title.contains("Jenkins"));
         
-        System.out.println(">>> [PASS] Test chuc nang tim kiem thanh cong!");
+        System.out.println(">>> [PASS] Test Wiki thanh cong ruc ro!");
     }
 
     @AfterEach
     public void teardown() {
         if (driver != null) {
-            driver.quit(); // Chạy xong là dọn dẹp, tắt trình duyệt
+            driver.quit(); // Đóng trình duyệt
         }
     }
 }
