@@ -4,9 +4,15 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GoogleSearchTest {
@@ -14,43 +20,47 @@ public class GoogleSearchTest {
 
     @BeforeEach
     public void setup() {
-        // Tự động tải và cài đặt Driver cho Chrome
         WebDriverManager.chromedriver().setup();
-        
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-        
-        // Mở trình duyệt lên (Nếu muốn chạy ngầm thì bỏ comment dòng dưới)
-        // options.addArguments("--headless=new"); 
-        
         driver = new ChromeDriver(options);
+        
+        // Dặn con Bot: Nếu mạng chậm, hãy kiên nhẫn đợi tối đa 10 giây để web tải xong
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Test
     public void testGoogleSearch() throws InterruptedException {
         System.out.println(">>> [START] Bat dau mo Google...");
-        
-        // 1. Vào trang Google
         driver.get("https://www.google.com");
-        
-        // Ngủ 2 giây để ông kịp nhìn thấy trình duyệt nó hiện lên
-        Thread.sleep(5000);
 
+        // 1. Tìm cái ô nhập chữ của Google (Mã nguồn Google đặt tên ô này là 'q')
+        WebElement searchBox = driver.findElement(By.name("q"));
+
+        // 2. Tự động gõ từ khóa vào ô đó
+        String keyword = "Kiểm thử tự động Jenkins";
+        System.out.println(">>> [INFO] Dang go tu khoa: " + keyword);
+        searchBox.sendKeys(keyword);
+
+        // 3. Tự động bấm phím Enter
+        searchBox.sendKeys(Keys.RETURN);
+
+        // Giữ lại 3 giây NGỦ Ở CUỐI CÙNG để thầy cô trên lớp kịp nhìn thấy kết quả tìm kiếm
+        // (Không có dòng này nó tắt phụt đi nhanh bằng mili-giây, không ai thấy gì)
+        Thread.sleep(3000);
+
+        // 4. Kiểm tra xem tiêu đề trang kết quả có chứa chữ mình tìm không
         String title = driver.getTitle();
         System.out.println(">>> [INFO] Tieu de trang web la: " + title);
+        assertTrue(title.contains("Kiểm thử"));
         
-        // 2. Kiểm tra tiêu đề có chữ Google không
-        assertTrue(title.contains("Google"));
-        
-        System.out.println(">>> [PASS] Test thanh cong! Web da san sang.");
-        
+        System.out.println(">>> [PASS] Test chuc nang tim kiem thanh cong!");
     }
 
     @AfterEach
     public void teardown() {
-        // Tắt trình duyệt sau khi test xong
         if (driver != null) {
-            driver.quit();
+            driver.quit(); // Chạy xong là dọn dẹp, tắt trình duyệt
         }
     }
 }
