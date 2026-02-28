@@ -1,15 +1,11 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build & Test') {
-            steps {
-                // Lệnh này bảo Jenkins: "Hãy chui vào thư mục này trước khi làm việc"
-                dir('Jenkins_Demo_Project') {
-                    echo '>>> Dang chui vao thu muc code...'
-                    // Windows dùng bat, Mac/Linux dùng sh
-                    bat 'mvn clean test'
-                }
-            }
-        }
+  agent any
+  stages {
+    stage('Test Google') {
+      steps {
+        bat 'mvn clean test'
+      }
     }
+
+  }
 }
