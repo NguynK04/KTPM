@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Build & Test') {
             steps {
-                // Phải có dòng này vì code của ông nằm trong thư mục con
+                // Phải chui vào đây thì lệnh mvn mới chạy được
                 dir('Jenkins_Demo_Project') {
+                    echo '>>> Dang chui vao thu muc code...'
                     bat 'mvn clean test'
                 }
             }
