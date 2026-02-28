@@ -42,7 +42,7 @@ public class GoogleSearchTest {
         // 2. Kiểm tra tiêu đề có chữ Google không
         assertTrue(title.contains("Google"));
         
-        System.out.println(">>> [PASS] Test thanh cong! Web ngon lanh.");
+        System.out.println(">>> [PASS] Test thanh cong! Web da san sang.");
     }
 
     @AfterEach
