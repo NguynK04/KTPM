@@ -23,7 +23,7 @@ public class WikipediaSearchTest {
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         
-        // CÚ CHỐT NẰM Ở ĐÂY: Bắt bot phóng to toàn màn hình để web không bị giấu ô tìm kiếm
+        
         driver.manage().window().maximize();
         
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -50,6 +50,7 @@ public class WikipediaSearchTest {
         assertTrue(title.contains("Jenkins"));
         
         System.out.println(">>> [PASS] Test Wiki thanh cong ruc ro!");
+        System.out.println(">>> [PASS] Test Wiki thanh cong, chuc mung ki chu!");
     }
 
     @AfterEach
