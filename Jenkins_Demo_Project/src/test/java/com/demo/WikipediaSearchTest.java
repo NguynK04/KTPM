@@ -47,7 +47,7 @@ public class WikipediaSearchTest {
 
         String title = driver.getTitle();
         System.out.println(">>> [INFO] Tieu de trang web la: " + title);
-        assertTrue(title.contains("Jenkins"));
+        assertTrue(title.contains("Cristiano Ronaldo"));
         
         System.out.println(">>> [PASS] Test Wiki thanh cong ruc ro!");
         System.out.println(">>> [PASS] Test Wiki thanh cong, chuc mung ki chu!");
