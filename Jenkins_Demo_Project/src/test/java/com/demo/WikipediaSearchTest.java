@@ -37,7 +37,7 @@ public class WikipediaSearchTest {
         // Đổi cách tìm kiếm: Dùng ID (searchInput) sẽ chuẩn xác 100% hơn là dùng name
         WebElement searchBox = driver.findElement(By.id("searchInput"));
 
-        String keyword = "Cristiano Ronaldo";
+        String keyword = "Viet Nam";
         System.out.println(">>> [INFO] Dang go tu khoa: " + keyword);
         searchBox.sendKeys(keyword);
         searchBox.sendKeys(Keys.RETURN);
@@ -47,7 +47,7 @@ public class WikipediaSearchTest {
 
         String title = driver.getTitle();
         System.out.println(">>> [INFO] Tieu de trang web la: " + title);
-        assertTrue(title.contains("Cristiano Ronaldo"));
+        assertTrue(title.contains("Viet Nam"));
         
         System.out.println(">>> [PASS] Test Wiki thanh cong ruc ro!");
         System.out.println(">>> [PASS] Test Wiki thanh cong, chuc mung ki chu!");
