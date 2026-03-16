@@ -37,7 +37,7 @@ public class WikipediaSearchTest {
         
         WebElement searchBox = driver.findElement(By.id("searchInput"));
 
-        String keyword = "Viet Nam";
+        String keyword = "Korea";
         System.out.println(">>> [INFO] Dang go tu khoa: " + keyword);
         searchBox.sendKeys(keyword);
         searchBox.sendKeys(Keys.RETURN);
