@@ -34,7 +34,7 @@ public class WikipediaSearchTest {
         System.out.println(">>> [START] Bat dau mo Wikipedia...");
         driver.get("https://vi.wikipedia.org/");
 
-        // Đổi cách tìm kiếm: Dùng ID (searchInput) sẽ chuẩn xác 100% hơn là dùng name
+        
         WebElement searchBox = driver.findElement(By.id("searchInput"));
 
         String keyword = "Việt Nam";
@@ -42,8 +42,8 @@ public class WikipediaSearchTest {
         searchBox.sendKeys(keyword);
         searchBox.sendKeys(Keys.RETURN);
 
-        // Đợi hẳn 5 giây cho chắc củ
-        Thread.sleep(5000);
+        
+        Thread.sleep(10000);
 
         String title = driver.getTitle();
         System.out.println(">>> [INFO] Tieu de trang web la: " + title);
